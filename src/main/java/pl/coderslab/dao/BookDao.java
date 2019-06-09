@@ -6,6 +6,8 @@ import pl.coderslab.entity.Book;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -16,6 +18,12 @@ public class BookDao {
 
     public void saveBook(Book entity) {
         entityManager.persist(entity);
+    }
+
+    public List<Book> getAll(){
+        Query query = entityManager.createQuery("SELECT b FROM Book b");
+        List<Book> resultList = query.getResultList();
+        return resultList;
     }
 
     public Book findById(long id) {
