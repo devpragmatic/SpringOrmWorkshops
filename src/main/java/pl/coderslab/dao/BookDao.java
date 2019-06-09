@@ -25,6 +25,12 @@ public class BookDao {
         List<Book> resultList = query.getResultList();
         return resultList;
     }
+    public List<Book> getLike(String title){
+        Query query = entityManager.createQuery("SELECT b FROM Book b where b.title like :title");
+        query.setParameter("title", "%" + title + "%");
+        List<Book> resultList = query.getResultList();
+        return resultList;
+    }
 
     public Book findById(long id) {
         return entityManager.find(Book.class, id);
