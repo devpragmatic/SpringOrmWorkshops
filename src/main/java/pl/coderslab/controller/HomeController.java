@@ -17,7 +17,6 @@ public class HomeController {
     public String hello() {
         Book book = new Book();
         book.setTitle("Thinking in Java");
-        book.setAuthor("Bruce Eckel");
         bookDao.saveBook(book);
         return "Id dodanej książki to:"
                 + book.getId();

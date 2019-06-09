@@ -2,6 +2,7 @@ package pl.coderslab.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "books")
@@ -11,12 +12,16 @@ public class Book {
     private Long id;
     @Column(unique = false, nullable = false, length = 100, name = "myTitle")
     private String title;
-    private String author;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Author> authors;
     //gettery i settery
     @Column(name = "created_on")
     private LocalDateTime createdOn;
     @Column(name = "updated_on")
     private LocalDateTime updatedOn;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "publisher_id")
+    private Publisher publisher;
 
     @PrePersist
     public void prePersist() {
@@ -60,12 +65,20 @@ public class Book {
         this.title = title;
     }
 
-    public String getAuthor() {
-        return author;
+    public List<Author> getAuthors() {
+        return authors;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setAuthors(List<Author> authors) {
+        this.authors = authors;
+    }
+
+    public Publisher getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
     }
 
     @Override
@@ -73,7 +86,6 @@ public class Book {
         return "Book{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", author='" + author + '\'' +
                 ", createdOn=" + createdOn +
                 ", updatedOn=" + updatedOn +
                 '}';
