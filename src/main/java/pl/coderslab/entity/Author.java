@@ -8,16 +8,16 @@ public class Author {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )
-    private String id;
+    private Long id;
     private String firstName;
     private String lastName;
 
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

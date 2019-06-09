@@ -33,7 +33,8 @@ public class BookController {
     @RequestMapping("/update/{id}")
     @ResponseBody
     public String update(@PathVariable long id) {
-        Book book = bookDao.findById(id);
+        Book book = new Book();
+        book.setId(id);
         book.setTitle("Thinking in Java - update");
         book.setAuthor("Bruce Eckel - update");
         bookDao.update(book);

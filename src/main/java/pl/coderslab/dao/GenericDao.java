@@ -9,6 +9,7 @@ public abstract class GenericDao<T> {
 
     @PersistenceContext
     private EntityManager entityManager;
+
     private final Class<T> clazz;
 
     public GenericDao(Class<T> clazz) {
